@@ -1,11 +1,12 @@
 import React from 'react';
 
-function Login(props) {
+function Signup(props) {
     return (
         <div>
+            <h1>Hello from signup</h1>
             
         </div>
     );
 }
 
-export default Login;
+export default Signup;
