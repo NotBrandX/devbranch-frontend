@@ -10,7 +10,7 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Nav = ({loggedIn, setLoggedIn}) => {
 	const history = useHistory()
@@ -43,10 +43,6 @@ const Nav = ({loggedIn, setLoggedIn}) => {
 		{
 			menuTitle: 'Profile',
 			pageURL: '/profile',
-		},
-		{
-			menuTitle: 'Account',
-			pageURL: '/account',
 		},
 		{
 			menuTitle: 'Sign Up',
@@ -117,11 +113,6 @@ const Nav = ({loggedIn, setLoggedIn}) => {
 								</Button>
 								<Button
 									variant='contained'
-									onClick={() => handleButtonClick('/account')}>
-									Account
-								</Button>
-								<Button
-									variant='contained'
 									onClick={logOut}>
 									Log Out
 								</Button>
@@ -149,4 +140,4 @@ const Nav = ({loggedIn, setLoggedIn}) => {
 	);
 };
 
-export default withRouter(Nav);
+export default Nav;
