@@ -3,7 +3,8 @@ import React from 'react';
 const Profile = (props) => {
     return (
         <div>
-            <input />
+            <h1>hi from profile</h1>
+            <a href="/settings">Settings</a>
         </div>
     );
 }
