@@ -10,50 +10,60 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import {withRouter} from 'react-router-dom'
+import { withRouter, useHistory } from 'react-router-dom';
 
-const Nav = props => {
-    const {history} = props
+const Nav = ({loggedIn, setLoggedIn}) => {
+	const history = useHistory()
+
+	const logOut = () => {
+		setLoggedIn(false);
+		history.push('/');
+	};
+	
 	const [anchorEl, setAnchorEl] = React.useState(null);
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 	const handleMenu = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
 
-	const handleMenuClick = pageURL => {
-        history.push(pageURL)
+	const handleMenuClick = (pageURL) => {
+		history.push(pageURL);
 		setAnchorEl(null);
 	};
 
-    const handleButtonClick = pageURL => {
-        history.push(pageURL);
-    }
-    const menuItems = [
-        {
-            menuTitle: 'Home',
-            pageURL: '/',
-        },
-        {
-            menuTitle: 'Profile',
-            pageURL: '/profile',
-        },
-        {
-            menuTitle: 'Account',
-            pageURL: '/account',
-        },
-        {
-            menuTitle: 'Logout',
-            pageURL: '/login',
-        }
-    ]
+	const handleButtonClick = (pageURL) => {
+		history.push(pageURL);
+	};
+	const menuItems = [
+		{
+			menuTitle: 'Home',
+			pageURL: '/',
+		},
+		{
+			menuTitle: 'Profile',
+			pageURL: '/profile',
+		},
+		{
+			menuTitle: 'Account',
+			pageURL: '/account',
+		},
+		{
+			menuTitle: 'Sign Up',
+			pageURL: '/signup',
+		},
+		{
+			menuTitle: 'Logout',
+			pageURL: '/login',
+		},
+	];
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='static'>
 				<Toolbar>
 					<Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-							DevBranch
+						DevBranch
 					</Typography>
 					<div>
 						{isMobile ? (
@@ -98,7 +108,9 @@ const Nav = props => {
 									onClick={() => handleButtonClick('/')}>
 									Home
 								</Button>
-								<Button
+								{loggedIn ? (
+									<>
+									<Button
 									variant='contained'
 									onClick={() => handleButtonClick('/profile')}>
 									Profile
@@ -110,9 +122,24 @@ const Nav = props => {
 								</Button>
 								<Button
 									variant='contained'
-									onClick={() => handleButtonClick('/login')}>
-									Logout
+									onClick={logOut}>
+									Log Out
 								</Button>
+									</>
+								) : (
+									<>
+									<Button
+									variant='contained'
+									onClick={() => handleButtonClick('/signup')}>
+									Sign Up
+								</Button>
+								<Button
+									variant='contained'
+									onClick={() => handleButtonClick('/login')}>
+									Login
+								</Button>
+								</>
+								)}
 							</div>
 						)}
 					</div>
@@ -120,6 +147,6 @@ const Nav = props => {
 			</AppBar>
 		</Box>
 	);
-}
+};
 
 export default withRouter(Nav);

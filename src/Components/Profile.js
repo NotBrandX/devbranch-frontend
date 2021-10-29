@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Profile(props) {
+const Profile = (props) => {
     return (
         <div>
-            <h1>Hi from Profile</h1>
+            <input />
         </div>
     );
 }
