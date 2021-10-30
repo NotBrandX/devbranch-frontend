@@ -2,10 +2,14 @@ import React, {useState, useEffect} from 'react';
 import Post from './Post'
 import axios from 'axios';
 import API_URL from '../Config'
+import { TextField, Box, Button } from '@mui/material';
 
 const Home = (props) => {
    const [posts, setPosts] = useState([]);
 
+
+
+//    retrieves posts from API
 		const getPost = async () => {
 			try {
 				const res = await axios.get(`${API_URL}/posts`);
@@ -13,7 +17,6 @@ const Home = (props) => {
 			} catch (error) {
 				console.log(error);
 			}
-            // console.log(res);
 		};
 
 		useEffect(() => {
@@ -27,10 +30,24 @@ const Home = (props) => {
 		// The results are displayed below
 		return (
 			<div>
+				<form>
+					<Box
+						sx={{
+							width: 500,
+							maxWidth: '100%',
+						}}>
+						<TextField fullWidth label='new post' id='fullWidth' />
+						<input type='file' />
+						<Button variant='contained'>Submit</Button>
+					</Box>
+				</form>
 				<div className='posts'>
-					{posts.slice(0).reverse().map((post) => (
-						<Post post={post} key={post._id} />
-					))}
+					{posts
+						.slice(0)
+						.reverse()
+						.map((post) => (
+							<Post post={post} key={post._id} />
+						))}
 				</div>
 			</div>
 		);

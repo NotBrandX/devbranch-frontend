@@ -26,25 +26,7 @@ const style = {
 };
 
 function Post({ post }) {
-
-	const [photo, setPhoto] = useState();
-	const [body, setBody] = useState();
-
-	const history = useHistory();
-	const id = localStorage.getItem('userId');
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const response = await axios.post(`${API_URL}/comments`, {
-				photo: photo,
-				body: body,
-				owner: id,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+	
 
 	// modal
 	const [open, setOpen] = React.useState(false);
@@ -105,7 +87,7 @@ function Post({ post }) {
 						cols={3}
 					/>
 					<input type='file' />
-					<Button variant='contained' onClick={handleSubmit}>
+					<Button variant='contained'>
 						Submit
 					</Button>
 				</Box>
