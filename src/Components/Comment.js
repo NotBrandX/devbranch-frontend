@@ -8,7 +8,6 @@ function Comment({ post }) {
 			</div>
 
 			<img src={post.photo} />
-			<a href='/comments'>Comments</a>
 		</div>
 	);
 }

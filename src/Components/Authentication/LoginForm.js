@@ -3,7 +3,7 @@ import API_URL from '../../Config';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({setLoggedIn}) => {
 	const history = useHistory();
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
@@ -16,6 +16,9 @@ const LoginForm = () => {
 				email: email,
 				password: password,
 			});
+			const token = res.data.token;
+			localStorage.setItem('token', token);
+			setLoggedIn(true);
 			history.push('/');
 		} catch (error) {
 			console.log(error);
