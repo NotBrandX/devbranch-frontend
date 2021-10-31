@@ -9,6 +9,9 @@ import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
+import axios from 'axios';
+import API_URL from '../Config';
+import { useHistory } from 'react-router-dom';
 
 const style = {
 	position: 'absolute',
