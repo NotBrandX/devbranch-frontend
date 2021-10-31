@@ -15,15 +15,15 @@ const Signup = (setLoggedIn) => {
 		e.preventDefault();
 		try {
 				// axios post request to send credentials to the backend
-				const res = await axios.post(`${API_URL}/users`, {
+				const res = await axios.post(`${API_URL}/users/`, {
 					username: username,
 					email: email,
 					password: password,
 					re_password: re_password,
 				});
 				history.push('/');
-		} catch (error) {
-			console.log(error);
+			} catch (error) {
+				console.log(error);
 		}
 	};
 
@@ -35,7 +35,7 @@ const Signup = (setLoggedIn) => {
 		const handleEmailField = (e) => {
 			setEmail(e.target.value);
 		};
-		// function to capture password input -- find a way to combine the two if possible
+		// functions to capture password
 		const handlePasswordField = (e) => {
 			setPassword(e.target.value);
 		};
@@ -44,7 +44,7 @@ const Signup = (setLoggedIn) => {
 		};
 
 		return (
-			<form onSubmit={createUser}>
+			<form >
 				<label className='label' htmlFor=''>
 					Username
 				</label>
@@ -72,7 +72,7 @@ const Signup = (setLoggedIn) => {
 					onChange={handleRePasswordField}
 				/>
 				<div>
-					<button type='submit'>Create Account</button>
+					<button type='submit' onClick={createUser}>Create Account</button>
 				</div>
 			</form>
 		);

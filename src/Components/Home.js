@@ -32,6 +32,7 @@ const Home = (props) => {
 			<div>
 				<form>
 					<Box
+						className='card'
 						sx={{
 							width: 500,
 							maxWidth: '100%',
