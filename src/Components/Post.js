@@ -9,9 +9,6 @@ import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-import axios from 'axios';
-import API_URL from '../Config';
-import { useHistory } from 'react-router-dom';
 
 const style = {
 	position: 'absolute',
@@ -42,7 +39,7 @@ function Post({ post }) {
 	
 	
 	return (
-		<Card sx={{ maxWidth: 450 }}>
+		<Card className='card' sx={{ maxWidth: 450 }}>
 			<Grid
 				container
 				spacing={0}
