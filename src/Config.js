@@ -1,3 +1,3 @@
-const API_URL = 'http://devbranchapi.herokuapp.com';
+const API_URL = 'https://devbranchapi.herokuapp.com';
 
 export default API_URL;
