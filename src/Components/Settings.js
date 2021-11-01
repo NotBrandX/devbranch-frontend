@@ -16,10 +16,10 @@ const Settings = ({ match, setLoggedIn }) => {
     
      console.log(JSON.parse(userInfo).id);
 
-    let headers = {
-			'Content-Type': 'application/json',
-			'Authorization': `${token}`,
-		};
+    // let headers = {
+			// 'Content-Type': 'application/json',
+	// 		'Authorization': 'Token' + `${token}`,
+	// 	};
         
         const handleEmailField = (e) => {
             setEmail(e.target.value);
@@ -34,16 +34,28 @@ const Settings = ({ match, setLoggedIn }) => {
 			setPassword(e.target.value);
 		};
 
+
+        // Get request for the user info
+        const getUser = async () => {
+					try {
+						const res = await axios.get(`${API_URL}/api/user/me/`, {
+							headers: {
+								'Content-Type': 'application/json',
+								'Authorization': `${token}`
+							},
+						});
+					} catch (error) {
+						console.log(error);
+					}
+				};
+                
 		// PUT axios() request to edit user info
 		const handleSubmit = async (evt, next) => {
 			evt.preventDefault();
 			try {
 				// axios put request to update the info in the backend
-				const res = await axios.put(`${API_URL}/users/${id}/`, {
-					email: email,
+				const res = await axios.put(`${API_URL}/users/me/`, {
 					username: username,
-                    password: password,
-                    avatar: avatar,
 				},
                 );
                 history.push('/')
@@ -57,7 +69,7 @@ const Settings = ({ match, setLoggedIn }) => {
 			if (verify) {
 				try {
 					// axios delete request to delete the account in the backend
-					const res = await axios.delete(`${API_URL}/users/${id}/`);
+					const res = await axios.delete(`${API_URL}/users/me/`);
 					history.push('/');
 					localStorage.clear();
 					setLoggedIn(false);
@@ -66,6 +78,38 @@ const Settings = ({ match, setLoggedIn }) => {
 				}
 			}
 		};
+		// // PUT axios() request to edit user info
+		// const handleSubmit = async (evt, next) => {
+		// 	evt.preventDefault();
+		// 	try {
+		// 		// axios put request to update the info in the backend
+		// 		const res = await axios.put(`${API_URL}/users/${id}/`, {
+		// 			email: email,
+		// 			username: username,
+        //             password: password,
+        //             avatar: avatar,
+		// 		},
+        //         );
+        //         history.push('/')
+		// 	} catch (error) {
+        //         console.log(error);
+        //     }
+		// };
+
+		// const handleDelete = async () => {
+		// 	const verify = window.confirm('Are you sure you want to delete?');
+		// 	if (verify) {
+		// 		try {
+		// 			// axios delete request to delete the account in the backend
+		// 			const res = await axios.delete(`${API_URL}/users/${id}/`);
+		// 			history.push('/');
+		// 			localStorage.clear();
+		// 			setLoggedIn(false);
+		// 		} catch (error) {
+		// 			console.log(error);
+		// 		}
+		// 	}
+		// };
 
         const handleCancel = async () => {
             history.push('/profile')
@@ -75,22 +119,22 @@ const Settings = ({ match, setLoggedIn }) => {
 		<div>
 			<h2 className='header'>Update/ Delete Account</h2>
 			<form onSubmit={handleSubmit}>
-				<label className='label' htmlFor=''>
+				{/* <label className='label' htmlFor=''>
 					email
 				</label>
 				<input type='text' onChange={handleEmailField} />
 				<label className='label' htmlFor=''>
 					password
 				</label>
-				<input type='password' onChange={handlePasswordField} />
+				<input type='password' onChange={handlePasswordField} /> */}
 				<label className='label' htmlFor=''>
 					username
 				</label>
 				<input type='text' onChange={handleUsernameField} />
-				<label className='label' htmlFor=''>
+				{/* <label className='label' htmlFor=''>
 					Avatar
 				</label>
-				<input type='text' onChange={handleAvatarField} />
+				<input type='text' onChange={handleAvatarField} /> */}
 				<span>
 					<button onClick={handleCancel}>Cancel</button>
 					<button type='submit'>Submit</button>
