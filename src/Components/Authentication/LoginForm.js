@@ -12,11 +12,20 @@ const LoginForm = ({setLoggedIn}) => {
 		e.preventDefault();
 		try {
 			// axios post request to send credentials to the backend
-			const res = await axios.post(`${API_URL}/token/login`, {
-				email: email,
-				password: password,
-			});
-			const token = res.data.token;
+			const res = await axios.post(
+				`${API_URL}/token/login` ,
+				{
+					email: email,
+					password: password,
+				},
+				// {
+				// 	headers: {
+				// 		'Access-Control-Allow-Origin': '*',
+				// 	},
+				// }
+			);
+			const token = res.data.auth_token;
+			console.log(res);
 			localStorage.setItem('token', token);
 			setLoggedIn(true);
 			history.push('/');

@@ -36,11 +36,21 @@ const Home = (props) => {
 	// function to allow user to make posts
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		console.log(localStorage.getItem('token'));
 		try {
-			const response = await axios.post(`${API_URL}/posts/`, {
-				body: body,
-				photo: photo,
-			});
+			const response = await axios.post(
+				`${API_URL}/posts/`,
+				{
+					body: body,
+					photo: photo,
+				},
+				{
+					headers: {
+						'Authorization': `Bearer ${localStorage.getItem('token')}`,
+						'Content-type': 'application/JSON'
+					},
+				}
+			);
 			history.push('/');
 		} catch (error) {
 			console.log(error);
