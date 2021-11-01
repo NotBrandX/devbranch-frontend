@@ -17,6 +17,7 @@ const Nav = ({loggedIn, setLoggedIn}) => {
 
 	const logOut = () => {
 		setLoggedIn(false);
+		localStorage.removeItem('token');
 		history.push('/');
 	};
 	
